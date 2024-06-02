@@ -1,8 +1,21 @@
+import { useState, useEffect } from "react";
 import "./PWABadge.css";
 
 import { useRegisterSW } from "virtual:pwa-register/react";
 
 function PWABadge() {
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+
+  useEffect(() => {
+    window.addEventListener("online", () => setIsOffline(false));
+    window.addEventListener("offline", () => setIsOffline(true));
+
+    return () => {
+      window.removeEventListener("online", () => setIsOffline(false));
+      window.removeEventListener("offline", () => setIsOffline(true));
+    };
+  }, []);
+
   // periodic sync is disabled, change the value to enable it, the period is in milliseconds
   // You can remove onRegisteredSW callback and registerPeriodicSync function
   const period = 0;
@@ -29,32 +42,38 @@ function PWABadge() {
     setOfflineReady(false);
     setNeedRefresh(false);
   }
+  console.warn("Is offlineReady:", offlineReady);
 
   return (
     <div className="PWABadge" role="alert" aria-labelledby="toast-message">
-      {(offlineReady || needRefresh) && (
+      {(isOffline || needRefresh) && (
         <div className="PWABadge-toast">
           <div className="PWABadge-message">
-            {offlineReady ? (
-              <span id="toast-message">App ready to work offline</span>
+            {isOffline ? (
+              <span id="toast-message">You are currently offline</span>
             ) : (
               <span id="toast-message">
-                New content available, click on reload button to update.
+                New content available, click on update button to update.
               </span>
             )}
           </div>
           <div className="PWABadge-buttons">
             {needRefresh && (
-              <button
-                className="PWABadge-toast-button"
-                onClick={() => updateServiceWorker(true)}
-              >
-                Reload
-              </button>
+              <>
+                <button
+                  className="PWABadge-toast-button"
+                  onClick={() => updateServiceWorker(true)}
+                >
+                  Update
+                </button>
+                <button
+                  className="PWABadge-toast-button"
+                  onClick={() => close()}
+                >
+                  Close
+                </button>
+              </>
             )}
-            <button className="PWABadge-toast-button" onClick={() => close()}>
-              Close
-            </button>
           </div>
         </div>
       )}
