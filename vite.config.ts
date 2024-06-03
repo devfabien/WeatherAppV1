@@ -19,11 +19,11 @@ export default defineConfig({
         name: "WeatherAppV1",
         short_name: "WeatherApp",
         description: "This is a weather application",
-        theme_color: "#000000",
+        theme_color: "#ffffff",
       },
 
       workbox: {
-        globPatterns: ["**/*.{js,css,html,svg,png,ico}"],
+        globPatterns: ["**/*.{js,css,html,svg,png,ico,webp}"],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
       },
