@@ -42,6 +42,35 @@ function App() {
             {notFound}
           </div>
         )}
+
+        <form
+          id="searchform"
+          className="w-[70%] md:w-[40%] p-3 rounded-lg flex items-center bg-white gap-2"
+          onSubmit={search}
+        >
+          <input
+            name="search"
+            className="w-full p-3 rounded-lg outline-none"
+            placeholder="City name..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-6 h-6 hover:bg-slate-400 rounded-lg"
+            onClick={search}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+        </form>
         {isLoading && (
           <svg
             version="1.1"
@@ -86,34 +115,6 @@ function App() {
             </circle>
           </svg>
         )}
-        <form
-          id="searchform"
-          className="w-[70%] md:w-[40%] p-3 rounded-lg flex items-center bg-white gap-2"
-          onSubmit={search}
-        >
-          <input
-            name="search"
-            className="w-full p-3 rounded-lg outline-none"
-            placeholder="City name..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6 hover:bg-slate-400 rounded-lg"
-            onClick={search}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-            />
-          </svg>
-        </form>
         {weather?.main && !notFound ? (
           <div className="mt-3 rounded-xl bg-slate-300/70 w-[80%] md:w-[50%] flex flex-col justify-center items-center p-4">
             <h2>
