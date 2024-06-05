@@ -20,6 +20,19 @@ export default defineConfig({
         short_name: "WeatherApp",
         description: "This is a weather application",
         theme_color: "#ffffff",
+        screenshots: [
+          {
+            src: "/public/desktopscreenshot.png",
+            sizes: "2882x1666",
+            type: "image/png",
+            form_factor: "wide",
+          },
+          {
+            src: "/public/mobilescreenshot.png",
+            sizes: "844x1704",
+            type: "image/png",
+          },
+        ],
       },
 
       workbox: {
