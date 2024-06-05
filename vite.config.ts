@@ -22,13 +22,13 @@ export default defineConfig({
         theme_color: "#ffffff",
         screenshots: [
           {
-            src: "/public/desktopscreenshot.png",
+            src: "/desktopscreenshot.png",
             sizes: "2882x1666",
             type: "image/png",
             form_factor: "wide",
           },
           {
-            src: "/public/mobilescreenshot.png",
+            src: "/mobilescreenshot.png",
             sizes: "844x1704",
             type: "image/png",
           },
